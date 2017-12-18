@@ -1,19 +1,24 @@
-<ion-menu [content]="content">
-  <ion-header>
-    <ion-toolbar>
+<ion-menu [content]="content"  type="overlay" color="headerColor">
+  <ion-header color="headerColor">
+    <ion-toolbar color="headerColor">
       <ion-title>Menu</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-content>
-    <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
-      </button>
-    </ion-list>
+    
+    <ion-item>
+      <button ion-button outline full (click)="logOut()">Salir</button>
+    </ion-item>
+
+    <sync></sync>
+    <push-notifications></push-notifications>
+    
+
   </ion-content>
 
 </ion-menu>
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
-<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+<!-- <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav> -->
+<ion-nav #content [root]="rootPage"></ion-nav>

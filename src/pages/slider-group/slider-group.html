@@ -1,0 +1,46 @@
+<ion-content padding>
+  <ion-slides pager>
+    <ion-slide>
+      <div class="splash-bg"></div>
+      <div class="splash-info"></div>
+      <h2 class="slide-title" >Bienvenid@ a Show Me The Money</h2>
+      <p>Tu aplicacion para ordenar tus gastos</p>
+    </ion-slide>
+    <ion-slide>
+      <div class="splash-bg"></div>
+      <div class="splash-info"></div>
+      <h2 class="slide-title">Para continuar Crea un Grupo</h2>
+      <p>O Unete a uno existente</p>
+    </ion-slide>
+    <ion-slide>
+      <div class="splash-bg"></div>
+      <div class="splash-info"></div>
+      <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+      <ion-list>
+        <ion-item *ngFor="let item of items">
+          <div item-left text-center> 
+            <button ion-button color="primary" outline (click)="addUserToGroup(item)">Unirme</button>
+          </div>
+          <ion-label>
+            {{ item.nombre }}
+          </ion-label>
+          <ion-icon name='body' item-start></ion-icon>
+        </ion-item>
+        
+      </ion-list>
+      <button ion-button block color="primary" outline (click)="crearGrupo()" *ngIf="!hideCreateButton">
+        Crear Grupo
+      </button>
+    </ion-slide>
+
+    <ion-slide *ngIf="canContinue">
+      <ion-toolbar>
+      </ion-toolbar>
+      <h2 class="slide-title">Felicitaciones, ya puedes comenzar a seguir tus castos</h2>
+      <button ion-button block color="primary" outline (click)="continuar()">
+        Continuar
+      </button>
+    </ion-slide>
+
+  </ion-slides>
+</ion-content>

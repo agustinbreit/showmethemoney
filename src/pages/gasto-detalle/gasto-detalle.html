@@ -1,0 +1,44 @@
+<ion-header>
+    
+      <ion-navbar color="headerColor">
+        
+        <ion-buttons start>
+            <button ion-button (click)="dismiss()">Volver</button>
+          </ion-buttons>
+          <ion-title>Detalle de Gasto</ion-title>
+      </ion-navbar>
+    
+    </ion-header>
+
+
+<ion-content padding>
+    <ion-card>
+        <ion-item>
+            <h2>{{gasto.usuario.user.login}}</h2>
+            <p>{{gasto.fechaGasto}}</p>
+          </ion-item>
+
+        <ion-card-content>
+          <ion-item>
+              <ion-icon name="outlet" item-left large ></ion-icon>
+              <h2>Comentarios</h2>
+              <p>{{gasto.descripcion}}</p>
+            </ion-item>
+          <ion-item>
+              <ion-icon name="git-commit" item-left large ></ion-icon>
+              <h2>Categoria</h2>
+              <p> {{gasto.categoria.categoria}}</p>
+            </ion-item>
+          <ion-item>
+              <ion-icon name="git-pull-request" item-left large ></ion-icon>
+              <h2>Sub Categoria</h2>
+              <p>{{gasto.categoria.subCategoria}}</p>
+          </ion-item>
+          <ion-item>
+              <ion-icon name="cash" item-left large ></ion-icon>
+              <h2>Monto</h2>
+              <p>{{gasto.monto}}</p>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+</ion-content>

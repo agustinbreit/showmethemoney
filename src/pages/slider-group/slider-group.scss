@@ -1,0 +1,89 @@
+page-slider-group {
+    background-color: #F8F5E4;
+
+    .toolbar-background {
+        background: #fff;
+        border-color: transparent;
+      }
+    
+      .slide-zoom {
+        height: 100%;
+      }
+    
+      .slide-title {
+        margin-top: 2.8rem;
+      }
+    
+      .slide-image {
+        max-height: 50%;
+        max-width: 60%;
+        margin: 18px 0;
+      }
+    
+      b {
+        font-weight: 500;
+      }
+    
+      p {
+        padding: 0 40px;
+        font-size: 14px;
+        line-height: 1.5;
+        color: #60646B;
+    
+        b {
+          color: #000000;
+        }
+      }
+
+
+
+      .splash-bg {
+        position: relative;
+        background: url('../assets/img/splashbg.png') no-repeat transparent;
+        background-size: cover;
+        height: 35%;
+        z-index: 1;
+        background-repeat: repeat-x;
+        animation: animatedBackground 40s linear infinite;
+      }
+    
+      @keyframes animatedBackground {
+        from { background-position: 0 0; }
+        to { background-position: 100% 0; }
+      }
+    
+      .splash-info {
+        position: absolute;
+        z-index: 2;
+        margin-top: -64px;
+        text-align: center;
+      }
+      .splash-logo {
+        margin: auto;
+        background: url('../assets/icon/web_hi_res_512.png') repeat transparent;
+        background-size: 100%;
+        background-color: rgb(96, 54, 171);
+        border-radius: 15px;
+        width: 128px;
+        height: 128px;
+      }
+      .splash-intro {
+        font-size: 18px;
+        font-weight: bold;
+        max-width: 80%;
+        margin: auto;
+      }
+      button.login {
+        margin-top: 25px;
+        background-color: white;
+        box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+        color: #333;
+    
+        &.activated {
+          background-color: rgb(220, 220, 220);
+        }
+      }
+
+
+
+}

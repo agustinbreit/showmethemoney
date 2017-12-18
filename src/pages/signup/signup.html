@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>
+      Crear una Cuenta
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <form [formGroup]="signupForm" (submit)="signupUser()" novalidate>
+
+    <ion-item>
+      <ion-label stacked>Nombre de Usuario</ion-label>
+      <ion-input formControlName="displayName" type="text"  placeholder="Nombre de Usuario" required minlength="6" maxlength="50" pattern="^[_'.@A-Za-z0-9-]*$"
+        [class.invalid]="!signupForm.controls.displayName.valid && signupForm.controls.displayName.dirty"></ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="!signupForm.controls.displayName.valid  && signupForm.controls.displayName.dirty">
+      <p>Tu nombre para mostrar debe tener mas de 6 caracteres y no puede contener espacios.</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Email</ion-label>
+      <ion-input formControlName="email" type="email" placeholder="Ingresa tu email" required pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})"
+        [class.invalid]="!signupForm.controls.email.valid && signupForm.controls.email.dirty"></ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="!signupForm.controls.email.valid  && signupForm.controls.email.dirty">
+      <p>Debes ingresar un email válido</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Password</ion-label>
+      <ion-input formControlName="password" type="password"  placeholder="tu password"
+        [class.invalid]="!signupForm.controls.password.valid && signupForm.controls.password.dirty"></ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="!signupForm.controls.password.valid  && signupForm.controls.password.dirty">
+      <p>Tu password debe tener mas de 6 caracteres.</p>
+    </ion-item>
+
+    <button ion-button block type="submit">
+     Crear una cuenta
+    </button>
+
+  </form>
+
+</ion-content>
+<ion-footer>
+  
+</ion-footer>

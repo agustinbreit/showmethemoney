@@ -1,0 +1,18 @@
+<div *ngIf="notificationsBoolean">
+  <!-- <ion-item>
+    <ion-label>{{pushButtonText}}</ion-label>
+    <ion-toggle [disabled]="disablePushButton"  color="danger"  (ionChange)=""></ion-toggle>
+  </ion-item> -->
+
+  <ion-fab right bottom *ngIf="isSubscribed">
+      <button [disabled]="disablePushButton" ion-fab color="danger" (click)="subscribeClick()"><ion-icon name="notifications"></ion-icon></button>
+  </ion-fab>
+  <ion-fab right bottom *ngIf="!isSubscribed">
+      <button [disabled]="disablePushButton" ion-fab color="danger" (click)="subscribeClick()"><ion-icon name="notifications-off"></ion-icon></button>
+  </ion-fab>
+<!-- 
+  <ion-fab right bottom>
+      <button ion-fab color="notifications-off" click="subscribeClick()"><ion-icon name="arrow-dropleft"></ion-icon></button>
+  </ion-fab> -->
+  
+</div>

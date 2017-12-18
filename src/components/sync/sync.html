@@ -1,0 +1,13 @@
+<ion-list>
+  <ion-item>
+    <ion-label>Fecha Inicio</ion-label>
+    <ion-datetime displayFormat="DD MM YYYY" max="2020-12-31" cancelText="Cancelar" doneText="Seleccionar"  [(ngModel)]="fechaInicio"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label>Fecha Fin</ion-label>
+    <ion-datetime displayFormat="DD MM YYYY" max="2020-12-31" cancelText="Cancelar" doneText="Seleccionar"  [(ngModel)]="fechaFin"></ion-datetime>
+  </ion-item>
+  <button ion-item (click)="buttonClick()" *ngIf="fechaInicio && fechaFin">
+    Buscar Gastos
+  </button>
+  </ion-list>

@@ -1,0 +1,50 @@
+<ion-content scroll="false">
+  <div class="splash-bg"></div>
+  <div class="splash-info">
+    <div class="splash-logo"></div>
+    <div class="splash-intro">Bienvenid@
+    </div>
+  </div>
+  <div padding>
+      <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>
+        <ion-item>
+          <ion-label stacked>Nombre de Usuario</ion-label>
+          <ion-input #username formControlName="username" type="text" placeholder="Nombre de Usuario" required minlength="1" maxlength="50" pattern="^[_'.@A-Za-z0-9-]*$"
+            [class.invalid]="!loginForm.controls.username.valid &&
+              loginForm.controls.username.dirty"></ion-input>
+        </ion-item>
+        <ion-item class="error-message" *ngIf="!loginForm.controls.username.valid  &&
+          loginForm.controls.username.dirty">
+          <p>El usuario ingresado no es valido.</p>
+        </ion-item>
+    
+        <ion-item>
+          <ion-label stacked>Password</ion-label>
+          <ion-input #password formControlName="password" type="password" placeholder="Contraseña"
+            [class.invalid]="!loginForm.controls.password.valid &&
+              loginForm.controls.password.dirty"></ion-input>
+        </ion-item>
+        <ion-item class="error-message" *ngIf="!loginForm.controls.password.valid  &&
+          loginForm.controls.password.dirty">
+          <p>La clave debe contener mas de 6 caracteres.</p>
+        </ion-item>
+    
+        <button ion-button block type="submit">
+          Login
+        </button>
+      </form>
+
+  <button ion-button block (click)="createAccount()" class="signup">Registrarme</button>
+  <button ion-button block (click)="goToResetPassword()" class="login">Recuperar Contraseña</button>
+</div>
+
+</ion-content>
+
+
+<!-- 
+
+<ion-content scroll="false">
+  
+    
+</ion-content>
+ -->

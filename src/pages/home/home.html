@@ -1,18 +1,36 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="headerColor">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>Home: </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+  <ion-fab top right  #fab1>
+    <button ion-fab mini (click)="openGastoModal()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+  <ion-card>
+    <ion-card-header>
+      Total Por Mes por Categoria
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #barCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+  <ion-card id="chart">
+    <ion-card-content style="height: 100%;">
+      <canvas #doughnutCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
 </ion-content>
+
+<ion-footer no-shadow>
+  <button ion-item  no-lines *ngIf="gastosMensuales" full block outline color="primary" outline (click)="verDetalles()">
+      <ion-icon name="list" item-start></ion-icon>
+      Ver Detalles
+    </button>
+</ion-footer>
