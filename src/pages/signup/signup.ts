@@ -12,7 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
 import { HomePage } from '../home/home';
 import { EmailValidator } from '../../validators/email';
-
+declare var idbKeyval;
 @IonicPage()
 @Component({
   selector: 'page-signup',
@@ -50,8 +50,8 @@ export class SignupPage {
         // usuario['userName']=this.signupForm.value.displayName;
         // let token=[];
         // token['uid']= user.rawResponse.id_token
-      this.storage.set('userName',this.signupForm.value.displayName).then((res)=>{console.log(res)}).catch(function(err) {console.log(err)});
-      this.storage.set('uid', user.rawResponse.id_token).then((res)=>{console.log(res)}).catch(function(err) {console.log(err)});
+        idbKeyval.set('userName',this.signupForm.value.displayName).then((res)=>{console.log(res)}).catch(function(err) {console.log(err)});
+        idbKeyval.set('uid', user.rawResponse.id_token).then((res)=>{console.log(res)}).catch(function(err) {console.log(err)});
         this.nav.setRoot(SliderGroupPage);
       }, (error) => {
         this.loading.dismiss().then( () => {

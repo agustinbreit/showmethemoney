@@ -30,9 +30,9 @@ export class GastoPage {
   }
 
   ionViewDidLoad() {
-    this.storage.get('uid').then((token)=>{
+    idbKeyval.get('uid').then((token)=>{
       this.token=token;
-      this.storage.get('categorias').then((categorias)=>{
+      idbKeyval.get('categorias').then((categorias)=>{
         if(categorias && categorias.length>0){
           this.createCategoryGroups(categorias);
           this.categorias=categorias;
@@ -40,7 +40,7 @@ export class GastoPage {
           this.api.getCategorias(token).then((res)=>{
             this.createCategoryGroups(res.responseBody);
             this.categorias=res.responseBody;
-            this.storage.set('categorias',this.categorias);
+            idbKeyval.set('categorias',this.categorias);
           });
         }
       });
@@ -97,10 +97,10 @@ export class GastoPage {
       .then(msg => navigator.serviceWorker.ready)
       .then(reg => {
           this.registerSyncEvent(reg).then((res)=>{
-            console.log(res);
+            //console.log(res);
             setTimeout(()=>{
               this.presentConfirm();
-            }, 100)
+            }, 500)
           }
             
           );
@@ -161,7 +161,7 @@ export class GastoPage {
   private registerSyncEvent(reg) {
     return reg.sync
       .register('gasto-pwa')
-      .then(() => console.log('Sync - registracion exitosa para mensajes-pwa'))
+      .then((res) => console.log(res))
       .catch(() => console.log('Sync - registracion fallida'));
   }
 
@@ -169,7 +169,7 @@ export class GastoPage {
   private sendExpense() {
     let body = {categoria:this.selectedCategory,descripcion:this.comentarios,monto:this.valor}
     this.api.agregarGasto(this.token,body).then((res)=>{
-      console.log(res);
+      //console.log(res);
       this.removeLastExpenseFromOutBox();
       this.presentConfirm();
     });

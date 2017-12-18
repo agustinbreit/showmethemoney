@@ -33,7 +33,7 @@ export class AuthProvider {
     headers.append("Access-Control-Allow-Origin", "*");
     let options = new RequestOptions({ headers: headers ,withCredentials: true });
     
-    let body = {username:user,password:newPassword}
+    let body = {username:user,password:newPassword,rememberMe:true}
     return this.http.post(this.baseUrl+'authenticate',JSON.stringify(body),options).map((response: Response) => {
       var rta = response.json();
       return (<any>rta);

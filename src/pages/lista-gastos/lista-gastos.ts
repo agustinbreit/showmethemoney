@@ -8,7 +8,6 @@ import { IonicPage, NavController, NavParams, ModalController, ViewController } 
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-
 @IonicPage()
 @Component({
   selector: 'page-lista-gastos',
@@ -22,6 +21,7 @@ export class ListaGastosPage {
     for(let gasto of this.gastos){
       this.montoTotal=this.montoTotal+gasto.monto;
     }
+
   }
 
   itemSelected(item){

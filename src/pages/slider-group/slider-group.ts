@@ -11,6 +11,7 @@ import { IonicPage, NavController, NavParams, MenuController,Slides } from 'ioni
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
+declare var idbKeyval;
 
 @IonicPage()
 @Component({
@@ -30,7 +31,7 @@ export class SliderGroupPage {
   ionViewDidEnter() {
     // the left menu should be disabled on the login page
     this.menuCtrl.enable(false);
-    this.storage.get('uid').then((user)=>{
+    idbKeyval.get('uid').then((user)=>{
       if(user){
       this.token = user;
     } else {

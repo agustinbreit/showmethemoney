@@ -15,6 +15,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 import { EmailValidator } from '../../validators/email';
 import { Storage } from '@ionic/storage';
 
+declare var idbKeyval;
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -46,8 +47,8 @@ export class LoginPage {
             // usuario['userName']=this.loginForm.value.username;
             // let token=[];
             // token['uid']=authData.rawResponse.id_token
-            this.storage.set('userName',this.loginForm.value.username).then((res)=>{console.log(res)}).catch(function(err) {console.log(err)});
-            this.storage.set('uid', authData.rawResponse.id_token).then((res)=>{console.log(res)}).catch(function(err) {console.log(err)});
+            idbKeyval.set('userName',this.loginForm.value.username).then((res)=>{console.log(res)}).catch(function(err) {console.log(err)});
+            idbKeyval.set('uid', authData.rawResponse.id_token).then((res)=>{console.log(res)}).catch(function(err) {console.log(err)});
           this.navCtrl.setRoot(HomePage);
           
           }else{

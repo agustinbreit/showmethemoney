@@ -7,7 +7,7 @@ import { AuthProvider } from './../../providers/auth/auth';
 import { Component, ViewChild } from '@angular/core';
 import { NavController, MenuController, ModalController, ToastController } from 'ionic-angular';
 import { Chart } from 'chart.js';
-
+declare var idbKeyval;
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -32,7 +32,7 @@ export class HomePage {
     this.lastDay = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0);
   }
   ionViewWillEnter() {
-        this.storage.get('uid').then((token)=>{
+        idbKeyval.get('uid').then((token)=>{
           this.token=token;
           this.getGastos(); 
         });
@@ -44,7 +44,8 @@ export class HomePage {
       this.api.findGastosByGruposByPeriod(this.token, this.getFormattedDate(this.firstDay),this.getFormattedDate(this.lastDay)).then((res)=>{
         let data = new BarChartData(res);
         this.gastosMensuales=data.gastos;
-        this.storage.set('gastos',this.gastosMensuales);
+        this.gastosMensuales.sort(function(a,b) {return (b.id > a.id) ? 1 : ((a.id > b.id) ? -1 : 0);} );
+        idbKeyval.set('gastos',this.gastosMensuales);
         setTimeout(()=> {
           this.createBarChart(data);
           this.createDoughnutChart(data);
@@ -52,7 +53,7 @@ export class HomePage {
         
       }).catch((e)=>{
         this.presentToast("Ocurrio un error al intentar recuperar los datos del servidor, mostrando desde caché");
-        this.storage.get('gastos').then((gastos)=>{
+        idbKeyval.get('gastos').then((gastos)=>{
           this.gastosMensuales=gastos;
         });
       });
@@ -70,8 +71,8 @@ export class HomePage {
 
 
   logout() {
-    this.storage.remove('uid');
-    this.storage.remove('userName');
+    idbKeyval.remove('uid');
+    idbKeyval.remove('userName');
   }
   
   openGastoModal(){
@@ -174,6 +175,7 @@ createDoughnutChart(data){
 }
 
 verDetalles(){
+
   let modal = this.modalCtrl.create(ListaGastosPage,{gastos:this.gastosMensuales});
   modal.present();
   modal.onDidDismiss(data => {

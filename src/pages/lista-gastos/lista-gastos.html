@@ -19,6 +19,15 @@
 
 <ion-content padding>
   <ion-list inset>
+      <ion-item>
+          <ion-grid>
+              <ion-row>
+                  <ion-col><h1 style="color:green"> Total: </h1></ion-col>
+                  
+                  <ion-col text-right style="color:green"><h1> ${{ montoTotal }}</h1></ion-col>
+              </ion-row>  
+            </ion-grid>
+      </ion-item>
     <ion-item *ngFor="let item of gastos" (click)="itemSelected(item)">
       <ion-grid>
         <ion-row>
@@ -28,14 +37,6 @@
         </ion-row>  
       </ion-grid>
     </ion-item>
-    <ion-item>
-        <ion-grid>
-            <ion-row>
-                <ion-col><h1 style="color:green"> Total: </h1></ion-col>
-                
-                <ion-col text-right style="color:green"><h1> ${{ montoTotal }}</h1></ion-col>
-            </ion-row>  
-          </ion-grid>
-    </ion-item>
+    
   </ion-list>
 </ion-content>

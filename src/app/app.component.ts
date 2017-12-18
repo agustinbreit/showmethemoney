@@ -8,6 +8,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
+declare var idbKeyval;
 
 @Component({
   templateUrl: 'app.html'
@@ -19,10 +20,9 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private authProvider:AuthProvider,public alertCtrl:AlertController,
-      private storage:Storage) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private authProvider:AuthProvider,public alertCtrl:AlertController) {
 
-      let user = this.storage.get('uid');
+      let user = idbKeyval.get('uid');
       user.then((user)=>{
          if(user){
          this.authProvider.setLoggedUserData(user);
@@ -66,8 +66,8 @@ export class MyApp {
 
 
   logOut(){
-      this.storage.remove('uid');
-      this.storage.remove('userName');
+      idbKeyval.delete('uid');
+      idbKeyval.delete('userName');
       this.nav.setRoot(LoginPage);
   }
 

@@ -18,7 +18,7 @@ const config = {
 firebase.initializeApp(config);
 
 const messaging = firebase.messaging();
-
+declare var idbKeyval;
 
 
 @Component({
@@ -47,7 +47,13 @@ export class PushNotificationsComponent implements OnInit {
       
       navigator.serviceWorker.register('/service-worker.js').then(reg => {
         this.registration = reg;
-        this.registration.sync.register('gasto-pwa');
+        try{
+          this.registration.sync.register('gasto-pwa');
+        }catch(e){
+          console.log("error en la sincronizacion");
+        }
+
+       
         messaging.useServiceWorker(reg);
         this.initializeUI();
         
@@ -136,7 +142,7 @@ export class PushNotificationsComponent implements OnInit {
        
        
        
-       this.storage.get('uid').then((tokenId)=>{
+       idbKeyval.get('uid').then((tokenId)=>{
          const fetchOptions = { method: 'POST', headers: { 'Content-Type': 'application/json','Accept':'application/json','Authorization':'Bearer '+tokenId,'Access-Control-Allow-Origin':'*' }, body: this.subscriptionJson };
          fetch(url, fetchOptions)
          .then(response=>response.json())
@@ -163,7 +169,7 @@ export class PushNotificationsComponent implements OnInit {
         messaging.deleteToken(this.firebaseToken).then((res)=>console.log(res)).catch((e)=>console.log(e));
       }
       this.subscriptionJson = JSON.stringify({isSubscribed:false});
-      this.storage.get('uid').then((tokenId)=>{
+      idbKeyval.get('uid').then((tokenId)=>{
         if(tokenId){
           const fetchOptions = { method: 'POST', headers: { 'Content-Type': 'application/json','Accept':'application/json','Authorization':'Bearer '+tokenId }, body: this.subscriptionJson };
           fetch(url, fetchOptions)

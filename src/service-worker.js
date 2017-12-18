@@ -151,8 +151,9 @@ self.addEventListener('sync', event => {
         
           event.waitUntil(self.registration.showNotification(title, options));
         }
+        return res;
       })
-    );
+    )
   }
 });
 
@@ -197,8 +198,20 @@ function sendMessage(message) {
 function removeMessagesFromOutBox(response) {
   // If the first worked,let's assume for now they all did
   if (response && response.length && response[0]) {
-    return idbKeyval.clear()
-      .then(() => Promise.resolve(true) )
+      idbKeyval.get('gastos').then((gastos)=>{
+        if(gastos && gastos.length>0){
+          for(let gasto of response){
+            gastos.push(gasto);
+            idbKeyval.set('gastos',response);
+          }
+        }else{
+          idbKeyval.set('gastos',response);
+        }
+        
+        //messages.put(gasto);
+      })
+    return idbKeyval.delete('gastos-sync')
+      .then(() =>response )
       .catch(err => console.log('unable to remove messages from outbox', err));
   }else{
     return Promise.resolve(false);
